@@ -5,6 +5,7 @@ title: wordhelper
 
 import streamlit as st
 from copy import deepcopy
+import pandas as pd
 
 def check_word(word_,letterlist):
     not_in = False
@@ -52,5 +53,9 @@ w_len = st.slider(
     help='Hier Länge einstellen :)')
 if st.button('Suchen',help='klick mich zum suchen :)'):
     res_list = find_words(w_len,lets)
-    st.dataframe(res_list)
+    for idx,word in enumerate(res_list):
+        res_list[idx] = word.upper()
+    res_df = pd.DataFrame(res_list,columns=('Wörter',))
+    st.dataframe(res_df)
+
 
